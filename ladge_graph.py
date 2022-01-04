@@ -23,4 +23,6 @@ ladge_graph: Graph = {
     "end": {}
 }
 
-print(get_optimal_route_cost(ladge_graph))
+path, cost = get_optimal_route_cost(ladge_graph)
+print_path(path)
+print(f"only for {cost}$")
