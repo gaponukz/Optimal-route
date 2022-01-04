@@ -15,4 +15,6 @@ graph: Graph = {
     "end": {}
 }
 
-print(get_optimal_route_cost(graph))
+path, cost = get_optimal_route_cost(graph)
+print_path(path)
+print(f"only for {cost}$")
