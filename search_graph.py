@@ -22,6 +22,11 @@ def get_optimal_route_cost(graph: Graph) -> int:
         for point in list(graph)[1:]
     }
 
+    parents = {
+        point: ("start" if point in graph["start"].keys() else None) 
+        for point in list(graph)[1:]
+    }
+
     node = _find_lowest_cost_node(costs, [])
 
     while node is not None:
@@ -32,8 +37,21 @@ def get_optimal_route_cost(graph: Graph) -> int:
             new_cost = cost + neighbors[n]
             if costs[n] > new_cost:
                 costs[n] = new_cost
+                parents[n] = node
         
         processed.append(node)
         node = _find_lowest_cost_node(costs, processed)
     
-    return costs['end']
+    return parents, costs['end']
+
+def print_path(parents: dict) -> None:
+    path = []
+    item = 'end'
+
+    while (parents[item] != "start"):
+        item = parents[item]
+        path.append(item)
+    
+    path = ["start"] + path[::-1] + ["end"]
+
+    print(" -> ".join(path))
